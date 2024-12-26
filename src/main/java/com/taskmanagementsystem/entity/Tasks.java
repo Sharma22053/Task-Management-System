@@ -29,7 +29,7 @@ public class Tasks {
 	@Column(name = "Description")
 	private String description;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.DATE)   /*map date types to DB specific*/
 	@Column(name = "due_date")
 	private Date dueDate;
 
@@ -79,6 +79,7 @@ public class Tasks {
 
 	}
 
+	//Getters and Setters
 	public Date getDueDate() {
 		return dueDate;
 	}

@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 
 
 //@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class,property="queueId")
-@Entity
+@Entity				                                  /*Make this class a JPA entity*/
 @Table(name = "user")
 public class User {
 
@@ -55,7 +55,7 @@ public class User {
     )
     private List<UserRole> roles;
 
-	public User() { }    /*No paramater constructor for */
+	public User() { }    /*No args constructor is used by JPA to load data from the database*/
 
 	public User(int userId, String username, String password, String email, String fullName) {
 		
@@ -66,6 +66,7 @@ public class User {
 		this.fullName = fullName;
 	}
 
+	/*Getters and Setters*/
 	public int getUserId() {
 		return userId;
 	}

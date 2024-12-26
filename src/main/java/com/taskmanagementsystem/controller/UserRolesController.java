@@ -18,36 +18,37 @@ import com.taskmanagementsystem.dto.UserRoleProjection;
 import com.taskmanagementsystem.entity.UserRoles;
 import com.taskmanagementsystem.service.UserRolesService;
 
-@CrossOrigin(origins = {"http://localhost:4200"})
+@CrossOrigin(origins = {"http://localhost:4200"}) // Allows cross-origin requests from Angular frontend.
 @RestController
 @RequestMapping("/api/userroles")
 public class UserRolesController {
 
-    private final UserRolesService userRolesService;
+	// Constructor-based dependency injection ensures immutability and easier testing.
+	private final UserRolesService userRolesService;
 
     public UserRolesController(UserRolesService userRolesService) {
         this.userRolesService = userRolesService;
     }
 
-    @PostMapping("/assign")
+    @PostMapping("/assign") //http://localhost:8091/api/userroles/assign
     public ResponseEntity<Map<String, String>> assignUserRole(@RequestBody UserRoles userRoles) {
         Map<String,String> response = userRolesService.assignUserRole(userRoles);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/all") //http://localhost:8091/api/userroles/all
     public ResponseEntity<List<UserRoleProjection>> getAllUserRoles() {
         List<UserRoleProjection> userRoles = userRolesService.getAllRoles();
         return new ResponseEntity<>(userRoles, HttpStatus.OK);
     }
 
-    @GetMapping("/user/{userId}")
+    @GetMapping("/user/{userId}")  //http://localhost:8091/api/userroles/user/{userId}
     public ResponseEntity<List<UserRoleProjection>> getUserRolesByUserId(@PathVariable int userId) {
         List<UserRoleProjection> userRoles = userRolesService.getUserRolesByUserId(userId);
         return new ResponseEntity<>(userRoles, HttpStatus.OK);
     }
 
-    @DeleteMapping("/revoke/{userRoleId}/{userId}")
+    @DeleteMapping("/revoke/{userRoleId}/{userId}")  //http://localhost:8091/api/userroles/revoke/{userRoleId}/{userId}
     public ResponseEntity<Map<String, String>> revokeUserRole(@PathVariable int userRoleId, @PathVariable int userId) {
         Map<String,String> successResponse = userRolesService.revokeUserRole(userRoleId, userId);
         return new ResponseEntity<>(successResponse, HttpStatus.OK);

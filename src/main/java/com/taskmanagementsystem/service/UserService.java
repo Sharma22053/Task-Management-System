@@ -24,7 +24,7 @@ public class UserService {
 		this.userRepository = userRepository;
 	}
 
-	@Transactional
+	@Transactional    /*Used for maintaning ACID properties of DB*/
 	public List<UserProjection> getListOfAllUsers() {
 	    List<UserProjection> users = userRepository.findAllProjectedBy();
 	    if (users.isEmpty()) {
@@ -44,7 +44,7 @@ public class UserService {
 		if (isUsernameOrEmailTaken(user.getUsername(), user.getEmail())) {
 			throw new UserOperationException("ADDFAILS","User already exist");
 	    }
-		Map<String, Object> successResponse = new LinkedHashMap<>();
+		Map<String, Object> successResponse = new LinkedHashMap<>();  /*End point is expecting a map and the values should be in order like how they are inserted that's why the linkedHashmap*/
 	    successResponse.put("code", "POSTSUCCESS");
 	    successResponse.put("message", "User created successfully");
 	    successResponse.put("user", userRepository.save(user));
@@ -57,6 +57,7 @@ public class UserService {
 		            .orElseThrow(() -> new UserOperationException("GETFAILS","User doesn't exist"));
 	}
 
+	
 	@Transactional
 	public UserProjection getUserByEmail(String email) {
 		

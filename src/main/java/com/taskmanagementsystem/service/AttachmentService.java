@@ -77,7 +77,7 @@ public class AttachmentService {
     public Map<String, String> deleteAttachment(int attachmentId) {
      
         Attachment existingAttachment = attachmentRepository.findById(attachmentId)
-                .orElseThrow(() -> new AttachmentOperationException("DELFAILS", "Attachment doesn't exist."));
+                .orElseThrow(() -> new AttachmentOperationException("DELETEFAILS", "Attachment doesn't exist."));
       
         attachmentRepository.delete(existingAttachment);
         Map<String, String> response = new LinkedHashMap<>();

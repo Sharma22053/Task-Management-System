@@ -29,6 +29,7 @@ public class UserRoles {
         this.userRole = userRole;
     }
 
+    //Getters and setters
     public UserRolesId getId() {
         return id;
     }

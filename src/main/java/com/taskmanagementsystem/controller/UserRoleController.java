@@ -27,7 +27,7 @@ public class UserRoleController {
 	@Autowired
 	UserRoleService userRoleService;
 	
-	@PostMapping("/post")
+	@PostMapping("/post") //http://localhost:8091/api/userrole/post
 	public ResponseEntity<Map<String,String>> createNewUserRole(@RequestBody UserRole userRole){
 		
 		Map<String,String> successResponse = userRoleService.createNewUserRole(userRole);
